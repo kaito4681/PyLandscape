@@ -12,4 +12,11 @@ from .metric import Metric
 from .cka import CKA
 from .hessian import Hessian
 from .surface import Surface
-from .mode_connectivity import ModeConnectivity
+
+
+def __getattr__(name):
+    if name == "ModeConnectivity":
+        from .mode_connectivity import ModeConnectivity
+
+        return ModeConnectivity
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
